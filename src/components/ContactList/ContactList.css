@@ -1,0 +1,31 @@
+.contact-list {
+  list-style: none;
+  padding: 0;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.table-container {
+  margin-top: 5px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.table th,
+.table td {
+  font-size: 12px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.table th {
+  background-color: #3498db;
+  color: #ecf0f1;
+}

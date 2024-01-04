@@ -1,0 +1,49 @@
+body {
+  background-color: lightgrey;
+}
+
+.app-container {
+  width: 300px;
+  margin: auto;
+  padding: 15px;
+  background-color: #ecf0f1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  text-align: center;
+  /* border: black 1px solid; */
+}
+
+h1 {
+  color: #3498db;
+  margin-bottom: 10px;
+}
+form {
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 8px;
+  background-color: #2ecc71;
+  color: #ecf0f1;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #27ae60;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
