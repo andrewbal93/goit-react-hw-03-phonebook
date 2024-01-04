@@ -9,13 +9,31 @@ import './App.css';
 class App extends Component {
   state = {
     contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+      { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
+      { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
+      { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
+      { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const storedContacts = localStorage.getItem('contacts');
+    if (!storedContacts) {
+      const defaultContacts = [...this.state.contacts];
+
+      this.setState({ contacts: defaultContacts });
+    } else {
+      this.setState({ contacts: JSON.parse(storedContacts) });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
 
   handleAddContactFormSubmit = formData => {
     const { name, number } = formData;
@@ -40,10 +58,15 @@ class App extends Component {
       number,
     };
 
-    this.setState(prev => ({
-      contacts: [...prev.contacts, newContact],
-      filter: '',
-    }));
+    this.setState(
+      prev => ({
+        contacts: [...prev.contacts, newContact],
+        filter: '',
+      }),
+      () => {
+        localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+      }
+    );
   };
 
   handleFilterChange = e => {
@@ -51,10 +74,15 @@ class App extends Component {
   };
 
   handleDeleteContact = contactId => {
-    this.setState(prev => ({
-      contacts: prev.contacts.filter(contact => contact.id !== contactId),
-      filter: '',
-    }));
+    this.setState(
+      prev => ({
+        contacts: prev.contacts.filter(contact => contact.id !== contactId),
+        filter: '',
+      }),
+      () => {
+        localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+      }
+    );
   };
 
   render() {
