@@ -19,11 +19,7 @@ class App extends Component {
 
   componentDidMount() {
     const storedContacts = localStorage.getItem('contacts');
-    if (!storedContacts) {
-      const defaultContacts = [...this.state.contacts];
-
-      this.setState({ contacts: defaultContacts });
-    } else {
+    if (storedContacts) {
       this.setState({ contacts: JSON.parse(storedContacts) });
     }
   }
@@ -58,15 +54,10 @@ class App extends Component {
       number,
     };
 
-    this.setState(
-      prev => ({
-        contacts: [...prev.contacts, newContact],
-        filter: '',
-      }),
-      () => {
-        localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-      }
-    );
+    this.setState(prev => ({
+      contacts: [...prev.contacts, newContact],
+      filter: '',
+    }));
   };
 
   handleFilterChange = e => {
@@ -74,15 +65,10 @@ class App extends Component {
   };
 
   handleDeleteContact = contactId => {
-    this.setState(
-      prev => ({
-        contacts: prev.contacts.filter(contact => contact.id !== contactId),
-        filter: '',
-      }),
-      () => {
-        localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-      }
-    );
+    this.setState(prev => ({
+      contacts: prev.contacts.filter(contact => contact.id !== contactId),
+      filter: '',
+    }));
   };
 
   render() {
